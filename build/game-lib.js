@@ -72,31 +72,50 @@ module.exports = __webpack_require__(1);
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 (function (window) {
 
-  let _init = ({ container = '', cellHeight = 50, cellWidth = 50 }) => {
-    let gameBody = document.getElementById(container);
+  var _init = function _init(_ref) {
+    var _ref$container = _ref.container,
+        container = _ref$container === undefined ? '' : _ref$container,
+        _ref$cellHeight = _ref.cellHeight,
+        cellHeight = _ref$cellHeight === undefined ? 50 : _ref$cellHeight,
+        _ref$cellWidth = _ref.cellWidth,
+        cellWidth = _ref$cellWidth === undefined ? 50 : _ref$cellWidth;
+
+    var gameBody = document.getElementById(container);
     if (gameBody === undefined) gameBody = document.getElementsByTagName("body")[0];
 
-    let tbl = document.createElement("table");
-    let tblBody = document.createElement("tbody");
-    let cellIndex = 0;
-    for (let i = 0; i < 3; i++) {
+    var tbl = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+    var gameState = 0;
+    for (var i = 0; i < 3; i++) {
       var row = document.createElement("tr");
-      for (let j = 0; j < 3; j++) {
-        let cell = document.createElement("td");
-        cell.setAttribute("index", cellIndex++);
+
+      var _loop = function _loop(j) {
+        var cell = document.createElement("td");
         cell.setAttribute("width", cellHeight + "px");
         cell.setAttribute("height", cellWidth + "px");
-
         //setting styles for table cells
         cell.style.textAlign = "center";
         cell.style.cursor = "pointer";
         cell.style.fontSize = cellHeight * 0.4 + 'px';
+        cell.addEventListener("click", function () {
+          var inputState = gameState % 2 ? 0 : 1;
+          var cellText = inputState == 1 ? 'X' : '0';
+          cell.innerHTML = cellText;
 
+          gameState++;
+        });
         row.appendChild(cell);
+      };
+
+      for (var j = 0; j < 3; j++) {
+        _loop(j);
       }
       tblBody.appendChild(row);
     }
@@ -104,7 +123,6 @@ module.exports = __webpack_require__(1);
     tbl.appendChild(tblBody);
     gameBody.appendChild(tbl);
     tbl.setAttribute("border", "1");
-
     // setting styles for table
     tbl.style.borderCollapse = 'collapse';
     tbl.style.border = '2px solid #000';
