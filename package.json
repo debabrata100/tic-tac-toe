@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/debabrata100/tic-tac-toe/issues"
   },
-  "homepage": "https://github.com/debabrata100/tic-tac-toe#readme"
+  "homepage": "https://github.com/debabrata100/tic-tac-toe#readme",
+  "dependencies": {
+    "webpack": "^3.10.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack-dev-server": "^2.9.7"
+  }
 }
