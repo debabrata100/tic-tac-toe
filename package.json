@@ -4,7 +4,8 @@
   "description": "Tic-Tac-Toe with es6 and webpack",
   "main": "app/index.js",
   "scripts": {
-    "start": "webpack && webpack-dev-server"
+    "start": "webpack && webpack-dev-server",
+    "build": "webpack"
   },
   "babel": {
     "presets": [

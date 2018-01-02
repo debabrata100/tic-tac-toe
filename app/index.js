@@ -58,4 +58,4 @@ import Winner from './winner';
 window.Game = {
   init:_init
 }
-})(window,undefined)
+})(window)
