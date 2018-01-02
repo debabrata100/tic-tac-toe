@@ -1,0 +1,24 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "Tic-Tac-Toe with es6 and webpack",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debabrata100/tic-tac-toe.git"
+  },
+  "keywords": [
+    "es6",
+    "webpack",
+    "gamelibrary"
+  ],
+  "author": "m.debabrata100@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/debabrata100/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/debabrata100/tic-tac-toe#readme"
+}
