@@ -77,7 +77,15 @@ module.exports = __webpack_require__(1);
 "use strict";
 
 
+var _winner = __webpack_require__(2);
+
+var _winner2 = _interopRequireDefault(_winner);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 (function (window) {
+
+  var W = new _winner2.default();
 
   var _init = function _init(_ref) {
     var _ref$container = _ref.container,
@@ -92,12 +100,15 @@ module.exports = __webpack_require__(1);
 
     var tbl = document.createElement("table");
     var tblBody = document.createElement("tbody");
+    var inputArray = [];
     var gameState = 0;
+    var cellIndex = 0;
     for (var i = 0; i < 3; i++) {
       var row = document.createElement("tr");
 
       var _loop = function _loop(j) {
         var cell = document.createElement("td");
+        cell.setAttribute("index", cellIndex++);
         cell.setAttribute("width", cellHeight + "px");
         cell.setAttribute("height", cellWidth + "px");
         //setting styles for table cells
@@ -105,11 +116,18 @@ module.exports = __webpack_require__(1);
         cell.style.cursor = "pointer";
         cell.style.fontSize = cellHeight * 0.4 + 'px';
         cell.addEventListener("click", function () {
+          var index = cell.getAttribute("index");
+          if (inputArray[index] !== undefined || W.name) return;
           var inputState = gameState % 2 ? 0 : 1;
           var cellText = inputState == 1 ? 'X' : '0';
           cell.innerHTML = cellText;
-
+          inputArray[index] = inputState;
           gameState++;
+          var winner = W.findWinner(inputArray);
+          if (winner.state == 0 || winner.state == 1) {
+            ScoreBoard.declareWinner(W);
+            ScoreBoard.drawScore(tbl, inputArray, winner);
+          }
         });
         row.appendChild(cell);
       };
@@ -134,7 +152,78 @@ module.exports = __webpack_require__(1);
   window.Game = {
     init: _init
   };
-})(window);
+})(window, undefined);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Winner = function () {
+  function Winner() {
+    _classCallCheck(this, Winner);
+
+    this._name = null;
+    this._score = 0;
+  }
+
+  _createClass(Winner, [{
+    key: 'findWinner',
+    value: function findWinner(inputLines) {
+      var winningLines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+      for (var i = 0; i < winningLines.length; i++) {
+        var _winningLines$i = _slicedToArray(winningLines[i], 3),
+            a = _winningLines$i[0],
+            b = _winningLines$i[1],
+            c = _winningLines$i[2];
+        // console.log(inputLines);
+
+
+        if (inputLines[a] !== undefined && inputLines[a] === inputLines[b] && inputLines[a] === inputLines[c]) {
+          this._name = inputLines[a] == 1 ? 'X' : '0';
+          this.calculateScore(inputLines, inputLines[a]);
+          return { state: inputLines[a], lines: [a, b, c] };
+        }
+      }
+      return { state: null, lines: [] };
+    }
+  }, {
+    key: 'calculateScore',
+    value: function calculateScore(inputLines, player) {
+      for (var i = 0; i < inputLines.length; i++) {
+        if (inputLines[i] == player) {
+          this._score++;
+        }
+      }
+    }
+  }, {
+    key: 'name',
+    get: function get() {
+      return this._name;
+    }
+  }, {
+    key: 'score',
+    get: function get() {
+      return this._score;
+    }
+  }]);
+
+  return Winner;
+}();
+
+exports.default = Winner;
 
 /***/ })
 /******/ ]);

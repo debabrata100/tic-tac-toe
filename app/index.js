@@ -35,7 +35,8 @@ import Winner from './winner';
                     gameState++;
                     let winner = W.findWinner(inputArray);
                     if(winner.state == 0 || winner.state == 1){
-                        console.log("Winner",W.name);
+                        ScoreBoard.declareWinner(W);
+                        ScoreBoard.drawScore(tbl, inputArray, winner);
                     }
                 })
                 row.appendChild(cell);
