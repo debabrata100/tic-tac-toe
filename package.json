@@ -4,7 +4,12 @@
   "description": "Tic-Tac-Toe with es6 and webpack",
   "main": "app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack && webpack-dev-server"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
   "repository": {
     "type": "git",
