@@ -10,7 +10,7 @@
           for (let i = 0; i < 3; i++) {
               var row = document.createElement("tr");
               for (let j = 0; j < 3; j++) {
-               let cell = document.createElement("td");
+                let cell = document.createElement("td");
                 cell.setAttribute("width",cellHeight+"px");
                 cell.setAttribute("height",cellWidth+"px");
 
