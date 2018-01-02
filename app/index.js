@@ -1,4 +1,13 @@
-let fun = ()=>{
-  console.log("We are ready for Tic-Tac-Toe");
+(function(window){
+
+  let _init = ({container = ''})=>{
+    let gameBody = document.getElementById(container);
+    if(gameBody === undefined)
+      gameBody = document.getElementsByTagName("body")[0];
+      console.log("Game Initialised");
+  }
+
+window.Game = {
+  init:_init
 }
-fun();
+})(window)
