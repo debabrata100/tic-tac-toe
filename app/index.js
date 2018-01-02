@@ -1,17 +1,23 @@
+import Winner from './winner';
 (function(window){
 
+  let W = new Winner();
+
   let _init = ({container = '',cellHeight = 50, cellWidth = 50})=>{
-    let gameBody = document.getElementById(container);
+      let gameBody = document.getElementById(container);
       if(gameBody === undefined)
         gameBody = document.getElementsByTagName("body")[0];
 
           let tbl     = document.createElement("table");
           let tblBody = document.createElement("tbody");
+          let inputArray = [];
           let gameState = 0;
+          let cellIndex = 0;
           for (let i = 0; i < 3; i++) {
               var row = document.createElement("tr");
               for (let j = 0; j < 3; j++) {
                let cell = document.createElement("td");
+                cell.setAttribute("index",(cellIndex++));
                 cell.setAttribute("width",cellHeight+"px");
                 cell.setAttribute("height",cellWidth+"px");
                 //setting styles for table cells
@@ -19,11 +25,18 @@
                 cell.style.cursor = "pointer";
                 cell.style.fontSize = (cellHeight*0.4) + 'px';
                 cell.addEventListener("click",()=>{
+                    let index = cell.getAttribute("index");
+                    if(inputArray[index] !== undefined || W.name)
+                      return;
                     let inputState = gameState % 2? 0: 1;
                     let cellText = inputState == 1? 'X':'0';
                     cell.innerHTML = cellText;
-
+                    inputArray[index] = inputState;
                     gameState++;
+                    let winner = W.findWinner(inputArray);
+                    if(winner.state == 0 || winner.state == 1){
+                        console.log("Winner",W.name);
+                    }
                 })
                 row.appendChild(cell);
               }
@@ -44,4 +57,4 @@
 window.Game = {
   init:_init
 }
-})(window)
+})(window,undefined)
