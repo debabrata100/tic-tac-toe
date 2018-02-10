@@ -1,4 +1,5 @@
 import Winner from './winner';
+import ScoreBoard from './score-board';
 (function(window){
 
   let W = new Winner();

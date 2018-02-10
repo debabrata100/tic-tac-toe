@@ -81,6 +81,10 @@ var _winner = __webpack_require__(2);
 
 var _winner2 = _interopRequireDefault(_winner);
 
+var _scoreBoard = __webpack_require__(3);
+
+var _scoreBoard2 = _interopRequireDefault(_scoreBoard);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (function (window) {
@@ -125,8 +129,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
           gameState++;
           var winner = W.findWinner(inputArray);
           if (winner.state == 0 || winner.state == 1) {
-            ScoreBoard.declareWinner(W);
-            ScoreBoard.drawScore(tbl, inputArray, winner);
+            _scoreBoard2.default.declareWinner(W);
+            _scoreBoard2.default.drawScore(tbl, inputArray, winner);
           }
         });
         row.appendChild(cell);
@@ -152,7 +156,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   window.Game = {
     init: _init
   };
-})(window, undefined);
+})(window);
 
 /***/ }),
 /* 2 */
@@ -224,6 +228,44 @@ var Winner = function () {
 }();
 
 exports.default = Winner;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ScoreBoard = {
+  drawScore: function drawScore(table, inputArray, winner) {
+    table.style.opacity = "0.5";
+    var cells = table.getElementsByTagName("td");
+    var cellIndex = void 0;
+    for (var c = 0; c < cells.length; c++) {
+      cellIndex = parseInt(cells[c].getAttribute("index"));
+      if (inputArray[cellIndex] == winner.state && winner.lines.indexOf(cellIndex) != -1) {
+        cells[c].style.backgroundColor = "#eee";
+      }
+    }
+  },
+  declareWinner: function declareWinner(W) {
+    var scoreboard = document.createElement("div");
+    scoreboard.style.margin = "auto";
+    scoreboard.style.height = '100px';
+    scoreboard.style.lineHeight = '110px';
+    scoreboard.style.border = 'dotted';
+    scoreboard.style.marginTop = '10px';
+    scoreboard.style.width = window.innerWidth - window.innerWidth * 0.02 + 'px';
+    scoreboard.style.backgroundColor = "transparent";
+    scoreboard.style.textAlign = "center";
+    scoreboard.innerHTML = "Winner: " + W.name + ", Score: " + W.score;
+    document.body.appendChild(scoreboard);
+  }
+};
+exports.default = ScoreBoard;
 
 /***/ })
 /******/ ]);
