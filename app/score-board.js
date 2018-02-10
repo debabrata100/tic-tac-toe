@@ -1,7 +1,7 @@
 const ScoreBoard = {
-      drawScore: (table, inputArray, winner)=>{
+      drawScore: (table, inputArray, winner)=> {
         table.style.opacity = "0.5";
-        let cells = table.getElementsByTagName("td");
+        const cells = table.getElementsByTagName("td");
         let cellIndex;
         for(let c = 0;c < cells.length;c++){
             cellIndex = parseInt(cells[c].getAttribute("index"));
@@ -10,8 +10,8 @@ const ScoreBoard = {
             }
         }
       },
-      declareWinner: (W)=>{
-        let scoreboard = document.createElement("div");
+      declareWinner: (W)=> {
+        const scoreboard = document.createElement("div");
         scoreboard.style.margin = "auto";
         scoreboard.style.height = '100px';
         scoreboard.style.lineHeight = '110px';

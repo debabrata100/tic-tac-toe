@@ -20,10 +20,10 @@ class Winner {
         if (inputLines[a] !== undefined && inputLines[a] === inputLines[b] && inputLines[a] === inputLines[c]) {
           this._name = inputLines[a] == 1 ? 'X': '0';
           this.calculateScore(inputLines,inputLines[a]);
-          return {state:inputLines[a],lines:[a, b, c]};
+          return { state: inputLines[a], lines: [a, b, c]};
         }
       }
-      return {state:null,lines:[]};
+      return { state: null, lines:[] };
     }
     calculateScore(inputLines,player){
       for(let i=0;i<inputLines.length;i++){

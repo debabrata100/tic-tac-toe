@@ -2,22 +2,22 @@ import Winner from './winner';
 import ScoreBoard from './score-board';
 (function(window){
 
-  let W = new Winner();
+  const W = new Winner();
 
-  let _init = ({container = '',cellHeight = 50, cellWidth = 50})=>{
+  let _init = ({container = '',cellHeight = 50, cellWidth = 50})=> {
       let gameBody = document.getElementById(container);
       if(gameBody === undefined)
-        gameBody = document.getElementsByTagName("body")[0];
+          gameBody = document.getElementsByTagName("body")[0];
 
-          let tbl     = document.createElement("table");
-          let tblBody = document.createElement("tbody");
+          const tbl     = document.createElement("table");
+          const tblBody = document.createElement("tbody");
           let inputArray = [];
           let gameState = 0;
           let cellIndex = 0;
           for (let i = 0; i < 3; i++) {
-              var row = document.createElement("tr");
+              let row = document.createElement("tr");
               for (let j = 0; j < 3; j++) {
-               let cell = document.createElement("td");
+                let cell = document.createElement("td");
                 cell.setAttribute("index",(cellIndex++));
                 cell.setAttribute("width",cellHeight+"px");
                 cell.setAttribute("height",cellWidth+"px");
@@ -25,7 +25,7 @@ import ScoreBoard from './score-board';
                 cell.style.textAlign = "center";
                 cell.style.cursor = "pointer";
                 cell.style.fontSize = (cellHeight*0.4) + 'px';
-                cell.addEventListener("click",()=>{
+                cell.addEventListener("click",()=> {
                     let index = cell.getAttribute("index");
                     if(inputArray[index] !== undefined || W.name)
                       return;
