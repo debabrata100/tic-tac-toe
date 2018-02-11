@@ -1,16 +1,19 @@
+import GameBoard from './game-board';
 const ScoreBoard = {
-      drawScore: (table, inputArray, winner)=> {
-        table.style.opacity = "0.5";
+      drawScore: ()=> {
+        const table = GameBoard.table;
+        const winner = GameBoard.winner;
+        GameBoard.table.style.opacity = "0.5";
         const cells = table.getElementsByTagName("td");
         let cellIndex;
         for(let c = 0;c < cells.length;c++){
             cellIndex = parseInt(cells[c].getAttribute("index"));
-            if(inputArray[cellIndex] == winner.state && winner.lines.indexOf(cellIndex)!=-1 ){
+            if(GameBoard.inputArray[cellIndex] == winner.state && winner.lines.indexOf(cellIndex)!=-1 ){
                 cells[c].style.backgroundColor = "#eee";
             }
         }
       },
-      declareWinner: (W)=> {
+      declareWinner: ()=> {
         const scoreboard = document.createElement("div");
         scoreboard.style.margin = "auto";
         scoreboard.style.height = '100px';
@@ -20,7 +23,7 @@ const ScoreBoard = {
         scoreboard.style.width = (window.innerWidth-window.innerWidth*0.02)+'px';
         scoreboard.style.backgroundColor = "transparent";
         scoreboard.style.textAlign = "center";
-        scoreboard.innerHTML = "Winner: "+W.name +", Score: "+W.score;
+        scoreboard.innerHTML = "Winner: " + GameBoard.winner.name +", Score: " + GameBoard.winner.score;
         document.body.appendChild(scoreboard);
       }
 };
